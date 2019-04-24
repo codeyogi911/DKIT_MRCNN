@@ -1,7 +1,7 @@
 %%sh
 
 # The name of our algorithm
-algorithm_name=dkit_mask_mcrnn
+algorithm_name=dkit_mrcnn
 
 cd container
 
