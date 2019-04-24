@@ -5,7 +5,7 @@ algorithm_name=dkit_mask_mcrnn
 
 cd container
 
-chmod +x ${algorithm_name}/train
+chmod +x ${algorithm_name}/train.sh
 chmod +x ${algorithm_name}/serve
 
 account=$(aws sts get-caller-identity --query Account --output text)
