@@ -51,6 +51,10 @@ COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
 # Directory to save logs and model checkpoints, if not provided
 # through the command line argument --logs
 DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
+prefix = '/opt/ml/'
+DEFAULT_DATA_DIR = os.path.join(prefix,'input/data')
+output_path = os.path.join(prefix, 'output')
+model_path = os.path.join(prefix, 'model')
 
 ############################################################
 #  Configurations
@@ -293,9 +297,11 @@ if __name__ == '__main__':
                         metavar="<command>",
                         help="'train' or 'splash'")
     parser.add_argument('--dataset', required=False,
+                        default=DEFAULT_DATA_DIR,
                         metavar="/path/to/dkit/dataset/",
                         help='Directory of the Dkit dataset')
     parser.add_argument('--weights', required=True,
+                        default="coco",
                         metavar="/path/to/weights.h5",
                         help="Path to weights .h5 file or 'coco'")
     parser.add_argument('--logs', required=False,
@@ -336,10 +342,10 @@ if __name__ == '__main__':
     # Create model
     if args.command == "train":
         model = modellib.MaskRCNN(mode="training", config=config,
-                                  model_dir=args.logs)
+                                  model_dir=model_path)
     else:
         model = modellib.MaskRCNN(mode="inference", config=config,
-                                  model_dir=args.logs)
+                                  model_dir=model_path)
 
     # Select weights file to load
     if args.weights.lower() == "coco":

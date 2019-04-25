@@ -3,7 +3,7 @@ FROM 763104351884.dkr.ecr.us-east-1.amazonaws.com/tensorflow-training:1.13-horov
 
 RUN apt-get update && apt-get install -y --no-install-recommends nginx curl
 
-COPY /dkit_mask_mcrnn /opt/ml/code
+COPY /dkit_mrcnn /opt/ml/code
 WORKDIR /opt/ml/code
 # Add custom stack of code
 RUN pip3 install -r requirements.txt && \
@@ -16,3 +16,5 @@ RUN curl https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-servin
 RUN apt-get update && apt-get install tensorflow-model-server
 
 ENV PATH="/opt/ml/code:${PATH}"
+
+ENTRYPOINT ["python3", "dkit.py"]
